@@ -19,3 +19,13 @@ end
 
 #ファッション
 tops,jaket_outer,pants,skart,wanpice,shoo,roomwea,hat,bag,acesary,tokei,sonota = fashion.children.create([{name: "トップス"},{name: "ジャケット/アウター"},{name: "パンツ"},{name: "スカート"},{name: "ワンピース"},{name: "靴"},{name: "ルームウェア/パジャマ"},{name: "帽子"},{name: "バッグ"},{name: "アクセサリー"},{name: "時計"},{name: "その他"}])
+
+
+#管理者権限
+User.create!(
+  nickname: "管理者",
+  email: ENV['ADMIN_EMAIL'],
+  password: ENV['ADMIN_PASSWORD'],
+  password_confirmation: ENV['ADMIN_PASSWORD'],
+  admin: true
+)
