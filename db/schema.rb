@@ -10,27 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_16_114124) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_16_130204) do
   create_table "categories", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "ancestry"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "members", charset: "utf8", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "post_members", charset: "utf8", force: :cascade do |t|
-    t.bigint "post_id", null: false
-    t.bigint "member_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_post_members_on_member_id"
-    t.index ["post_id"], name: "index_post_members_on_post_id"
   end
 
   create_table "posts", charset: "utf8", force: :cascade do |t|
@@ -52,11 +37,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_16_114124) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "post_members", "members"
-  add_foreign_key "post_members", "posts"
   add_foreign_key "posts", "users"
 end
