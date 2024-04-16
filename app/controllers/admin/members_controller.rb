@@ -1,4 +1,6 @@
 class Admin::MembersController < ApplicationController
+  before_action :check_admin?
+
   def create
     @member = Member.new(member_params)
     @members = Member.all
@@ -19,5 +21,11 @@ class Admin::MembersController < ApplicationController
   private
   def member_params
     params.require(:member).permit(:name)
+  end
+
+  def check_admin?
+    unless current_user.admin
+      redirect_to root_path
+    end
   end
 end
