@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   resources :categories do
     get :children, on: :member
   end
+
+  namespace :admin do
+    resources :members, only: [:index, :create, :destroy]
+  end
 end
