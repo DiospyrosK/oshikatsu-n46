@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @members = Member.all
   end
 
   def create
@@ -19,6 +20,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :explanation, :category_id).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :explanation, :category_id, member_ids: []).merge(user_id: current_user.id)
   end
 end
