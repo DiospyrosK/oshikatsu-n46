@@ -83,3 +83,5 @@ group :production do
 end
 
 gem 'devise'
+gem 'ancestry'
+gem 'pry-rails'
