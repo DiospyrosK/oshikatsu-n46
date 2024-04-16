@@ -1,0 +1,10 @@
+<div class="item-wrap row mb-5">
+<% members.each do |tag| %>
+  <div class="item shadow-sm col-md-4 p-3 my-3">
+    <%= member.name %>
+    <%= link_to admin_member_path(member.id), method: :delete, remote: true, style: 'color: red;', 'data-confirm'=>'このタグを削除します' do %>
+      <i class="fas fa-trash-alt"></i>
+    <% end %>
+  </div>
+<% end %>
+</div>
