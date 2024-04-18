@@ -10,7 +10,8 @@
 
       <% @posts.each do |post| %>
       <li class='list'>
-        <%= link_to post_path(post) do %>
+        <%#= link_to post_path(post) do %>
+        <%= link_to '#' do %>
         <div class='item-img-content'>
           <%= image_tag post.image, class: "item-img" if post.image.attached? %>
         </div>
