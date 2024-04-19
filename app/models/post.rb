@@ -9,5 +9,6 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :post_members, dependent: :destroy
   has_many :members, through: :post_members
+  has_many :likes
   has_one_attached :image
 end
