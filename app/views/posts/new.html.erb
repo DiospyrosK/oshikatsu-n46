@@ -60,9 +60,8 @@
         <div id="category-child-container"></div>
         <!-- 孫カテゴリーのコンテナ -->
         <div id="category-grandchild-container"></div>
-      </div>
-      <div class="form-group row">
-        <%= f.label :member_ids, 'メンバー', class: 'col-md-4' %>
+        <!-- メンバータグフォーム -->
+        <%= f.label :member_ids, 'メンバー', class: 'weight-bold-text' %>
         <div class="col-md-8 border d-flex flex-row flex-wrap">
           <%= f.collection_check_boxes :member_ids, @members, :id, :name do |b| %>
             <div class="mx-2 mt-1">
