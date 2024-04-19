@@ -34,6 +34,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user.id == @post.user_id
+      @post.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
+  end
+
   private
 
   def post_params
