@@ -1,0 +1,76 @@
+<%= render "shared/header" %>
+
+<%# 商品の概要 %>
+<div class="item-show">
+  <div class="item-box">
+    <h2 class="name">
+      <%= @post.title %>
+    </h2>
+    <div class="item-img-content">
+      <%= image_tag @post.image ,class:"item-box-img" %>
+    </div>
+
+    <% if user_signed_in? %>
+      <% if current_user.id == @post.user_id %>
+      <%= link_to "商品の編集", edit_post_path(@post.id), method: :get, class: "item-red-btn" %>
+      <p class="or-text">or</p>
+      <%= link_to "削除", post_path(@post), data:{turbo_method: :delete}, class:"item-destroy" %>
+
+      <% elsif current_user.id != @post.user_id %>
+      <%#= link_to "購入画面に進む", item_orders_path(@item), data: { turbo: false }, class:"item-red-btn"%>
+
+      <% end %>
+    <% end %>
+
+    <div class="item-explain-box">
+      <span><%= @post.explanation %></span>
+    </div>
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-item">出品者</th>
+          <td class="detail-value"><%= @post.user.nickname %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">カテゴリー</th>
+          <td class="detail-value">
+          <% if @post.category.parent.present? %>
+              <% if @post.category.parent.parent.present? %>
+                <%= @post.category.parent.parent.name %> /
+              <% end %>
+            <%= @post.category.parent.name %> /
+          <% end %>
+          <%= @post.category.name %>
+          </td>
+        </tr>
+        <tr>
+          <th class="detail-item">メンバー</th>
+          <td class="detail-value">
+          <%= @post.members.pluck(:name).join(' / ') %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="option">
+      <div class="favorite-btn">
+        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+        <span>お気に入り 0</span>
+      </div>
+    </div>
+  </div>
+  <%# /商品の概要 %>
+
+  <div class="links">
+    <a href="#" class="change-item-btn">
+      ＜ 前の商品
+    </a>
+    <a href="#" class="change-item-btn">
+      後ろの商品 ＞
+    </a>
+  </div>
+
+  <a href="#" class="another-item"><%= @post.category.name %>をもっと見る</a>
+
+</div>
+
+<%= render "shared/footer" %>
