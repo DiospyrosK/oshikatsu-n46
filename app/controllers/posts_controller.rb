@@ -23,8 +23,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    return unless current_user.id != @post.user_id
-    redirect_to root_path
+    if current_user.id == @post.user_id || current_user.admin
+    else
+      redirect_to root_path
+    end
   end
 
   def update
@@ -36,7 +38,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @post.user_id
+    if current_user.id == @post.user_id || current_user.admin
       @post.destroy
       redirect_to root_path
     else
@@ -47,7 +49,12 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :explanation, :image, :category_id, member_ids: []).merge(user_id: current_user.id)
+    permitted_params = params.require(:post).permit(:title, :explanation, :image, :category_id, member_ids: [])
+    
+    # 管理者の場合はuser_idを更新しない
+    permitted_params = permitted_params.merge(user_id: current_user.id) unless current_user.admin?
+    
+    permitted_params
   end
 
   def set_post
