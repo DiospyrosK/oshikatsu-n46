@@ -7,7 +7,6 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @members = Member.all
   end
 
   def create
