@@ -19,9 +19,7 @@
             <%= post.title %>
           </h3>
         </div>
-        <div class='item-info' id="favorite-btn<%= post.id %>">
-          <%= render partial: "bookmarks/bookmark", locals: { post: post } %>
-        </div>
+        <%= render partial: "bookmarks/bookmark", locals: { post: post } %>
         <% end %>
       </li>
       <% end %>
