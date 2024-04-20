@@ -1,8 +1,12 @@
-const category_select= () => {
-  // 親カテゴリーのセレクトボックスの選択が変更された場合
-  document.getElementById('post_category_id').addEventListener('change', function() {
-    updateSubcategoriesAndCategoryId(this.value, 'child');
-  });
+const category_select = () => {
+  // 親カテゴリーのセレクトボックスが存在するかを確認
+  const postCategorySelect = document.getElementById('post_category_id');
+  if (postCategorySelect) {
+    // 存在する場合、変更イベントリスナーを追加
+    postCategorySelect.addEventListener('change', function() {
+      updateSubcategoriesAndCategoryId(this.value, 'child');
+    });
+  }
 
   // イベント委譲を使用して、子カテゴリーと孫カテゴリーのセレクトボックスの選択が変更された場合を捕捉
   document.addEventListener('change', function(e) {
