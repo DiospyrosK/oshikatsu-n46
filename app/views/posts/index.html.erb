@@ -19,6 +19,7 @@
             <%= post.title %>
           </h3>
         </div>
+        <%= render partial: "bookmarks/bookmark", locals: { post: post } %>
         <% end %>
       </li>
       <% end %>
